@@ -2,6 +2,7 @@ package de.fraulyoner.timetracker;
 
 import org.springframework.util.Assert;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -51,5 +52,13 @@ class TimeEntry {
     String getDay() {
 
         return start.format(DateTimeFormatter.ofPattern(FORMAT_PATTERN_DATE));
+    }
+
+    float getDuration() {
+
+        Duration duration = Duration.between(start, end);
+        long durationInMinutes = duration.toMinutes();
+
+        return (float) durationInMinutes / 60;
     }
 }

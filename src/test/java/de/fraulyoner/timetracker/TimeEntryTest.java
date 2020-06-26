@@ -90,9 +90,9 @@ class TimeEntryTest {
     @Test
     void ensureCanGetCorrectStartTime() {
 
-        LocalDate date = LocalDate.of(2020, 6, 23);
+        LocalDate today = LocalDate.now();
 
-        TimeEntry timeEntry = new TimeEntry(date.atTime(8, 30), date.atTime(9,0), "Meeting");
+        TimeEntry timeEntry = new TimeEntry(today.atTime(8, 30), today.atTime(9,0), "Meeting");
 
         Assertions.assertNotNull(timeEntry.getStartTime(), "Start time is missing");
         Assertions.assertEquals("08:30", timeEntry.getStartTime(), "Wrong start time");
@@ -101,9 +101,9 @@ class TimeEntryTest {
     @Test
     void ensureCanGetCorrectEndTime() {
 
-        LocalDate date = LocalDate.of(2020, 6, 23);
+        LocalDate today = LocalDate.now();
 
-        TimeEntry timeEntry = new TimeEntry(date.atTime(8, 30), date.atTime(9,0), "Meeting");
+        TimeEntry timeEntry = new TimeEntry(today.atTime(8, 30), today.atTime(9,0), "Meeting");
 
         Assertions.assertNotNull(timeEntry.getEndTime(), "End time is missing");
         Assertions.assertEquals("09:00", timeEntry.getEndTime(), "Wrong end time");
@@ -118,5 +118,24 @@ class TimeEntryTest {
 
         Assertions.assertNotNull(timeEntry.getDay(), "Day is missing");
         Assertions.assertEquals("23.06.2020", timeEntry.getDay(), "Wrong day");
+    }
+
+    @Test
+    void ensureCanGetCorrectDuration() {
+
+        LocalDate today = LocalDate.now();
+
+        TimeEntry timeEntry = new TimeEntry(today.atTime(8, 30), today.atTime(10,0), "Meeting");
+        Assertions.assertEquals(1.5, timeEntry.getDuration(), "Wrong duration");
+
+        timeEntry = new TimeEntry(today.atTime(8, 30), today.atTime(9,0), "Meeting");
+        Assertions.assertEquals(0.5, timeEntry.getDuration(), "Wrong duration");
+
+        timeEntry = new TimeEntry(today.atTime(8, 30), today.atTime(8,45), "Meeting");
+        Assertions.assertEquals(0.25, timeEntry.getDuration(), "Wrong duration");
+
+        timeEntry = new TimeEntry(today.atTime(8, 30), today.atTime(9,30), "Meeting");
+        Assertions.assertEquals(1, timeEntry.getDuration(), "Wrong duration");
+
     }
 }
