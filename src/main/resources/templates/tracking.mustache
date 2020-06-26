@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Time Tracker | Einträge für {{timeEntries.0.day}}</title>
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/milligram.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/main.css"/>
+</head>
+
+<body>
+
+<main class="wrapper">
+
+    <div class="container">
+        <h1>Einträge für {{timeEntries.0.day}}</h1>
+        <table>
+            <thead>
+            <tr>
+                <th>Start</th>
+                <th>Ende</th>
+                <th>Beschreibung</th>
+                <th>Dauer</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#timeEntries}}
+            <tr>
+                <td>{{startTime}}</td>
+                <td>{{endTime}}</td>
+                <td>{{description}}</td>
+                <td>TBD</td>
+            </tr>
+            {{/timeEntries}}
+            </tbody>
+        </table>
+    </div>
+
+</main>
+
+</body>
+
+</html>
