@@ -1,2 +1,3 @@
 # time-tracker
-Tool for time tracking based on drag &amp; drop calendar
+Tool for time tracking using a drag &amp; drop calendar.
+Kind of a relaunch of [redmine-time-tracker](https://github.com/fraulyoner/redmine-time-tracker).
