@@ -14,8 +14,8 @@ class DummyTimeEntryProvider implements TimeEntryProvider {
 
         List<TimeEntry> dummyEntries= new ArrayList<>();
 
-        dummyEntries.add(new TimeEntry(day.atTime(8, 30), day.atTime(9, 0), "Daily"));
-        dummyEntries.add(new TimeEntry(day.atTime(9, 0), day.atTime(10, 0), "Organisation und Co."));
+        dummyEntries.add(new TimeEntry(day.atTime(8, 30), day.atTime(9, 0), "#123", "Daily"));
+        dummyEntries.add(new TimeEntry(day.atTime(9, 0), day.atTime(10, 0),  "#123","Organisation und Co."));
 
         return dummyEntries;
     }

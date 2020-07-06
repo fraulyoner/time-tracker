@@ -44,7 +44,7 @@ class BaseControllerTest {
     void trackingShouldContainEntryInformation() throws Exception {
 
         LocalDate day = LocalDate.of(2020, 6, 23);
-        List<TimeEntry> entries = Arrays.asList(new TimeEntry(day.atTime(8, 30), day.atTime(9, 0), "Daily"));
+        List<TimeEntry> entries = Arrays.asList(new TimeEntry(day.atTime(8, 30), day.atTime(9, 0), "#123","Daily"));
 
         when(timeEntryProvider.getAllTimeEntriesForDay(any(LocalDate.class))).thenReturn(entries);
 

@@ -13,17 +13,20 @@ class TimeEntry {
 
     private LocalDateTime start;
     private LocalDateTime end;
+    private String issue;
     private String description;
 
-    TimeEntry(LocalDateTime start, LocalDateTime end, String description) {
+    TimeEntry(LocalDateTime start, LocalDateTime end, String issue, String description) {
         Assert.notNull(start, "Start must not be null");
         Assert.notNull(end, "End must not be null");
+        Assert.hasText(issue, "Issue must not be empty");
         Assert.hasText(description, "Description must not be empty");
         Assert.isTrue(start.isBefore(end), "Start must be before end");
         Assert.isTrue(start.toLocalDate().equals(end.toLocalDate()), "Start and end must be on the same day");
 
         this.start = start;
         this.end = end;
+        this.issue = issue;
         this.description = description;
     }
 
@@ -37,6 +40,10 @@ class TimeEntry {
 
     String getDescription() {
         return description;
+    }
+
+    String getIssue() {
+        return issue;
     }
 
     String getStartTime() {
