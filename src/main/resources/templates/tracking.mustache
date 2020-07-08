@@ -15,7 +15,7 @@
 <main class="wrapper">
 
     <div class="container">
-        <h1>Einträge für {{timeEntries.0.day}}</h1>
+        <h1>Einträge für {{timeEntries.0.dayAsString}}</h1>
         <table>
             <thead>
             <tr>
@@ -29,8 +29,8 @@
             <tbody>
             {{#timeEntries}}
             <tr>
-                <td>{{startTime}}</td>
-                <td>{{endTime}}</td>
+                <td>{{startTimeAsString}}</td>
+                <td>{{endTimeAsString}}</td>
                 <td>{{issue}}</td>
                 <td>{{description}}</td>
                 <td>{{duration}}</td>

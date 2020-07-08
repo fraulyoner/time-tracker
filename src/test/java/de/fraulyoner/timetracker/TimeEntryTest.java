@@ -111,36 +111,47 @@ class TimeEntryTest {
     }
 
     @Test
-    void ensureCanGetCorrectStartTime() {
-
-        LocalDate today = LocalDate.now();
-
-        TimeEntry timeEntry = new TimeEntry(today.atTime(8, 30), today.atTime(9,0), "#ISSUE-123", "Meeting");
-
-        Assertions.assertNotNull(timeEntry.getStartTime(), "Start time is missing");
-        Assertions.assertEquals("08:30", timeEntry.getStartTime(), "Wrong start time");
-    }
-
-    @Test
-    void ensureCanGetCorrectEndTime() {
-
-        LocalDate today = LocalDate.now();
-
-        TimeEntry timeEntry = new TimeEntry(today.atTime(8, 30), today.atTime(9,0), "#ISSUE-123", "Meeting");
-
-        Assertions.assertNotNull(timeEntry.getEndTime(), "End time is missing");
-        Assertions.assertEquals("09:00", timeEntry.getEndTime(), "Wrong end time");
-    }
-
-    @Test
-    void ensureCanGetCorrectDay() {
+    void ensureDayIsSetCorrectly() {
 
         LocalDate date = LocalDate.of(2020, 6, 23);
 
         TimeEntry timeEntry = new TimeEntry(date.atTime(8, 30), date.atTime(9,0), "#ISSUE-123", "Meeting");
 
         Assertions.assertNotNull(timeEntry.getDay(), "Day is missing");
-        Assertions.assertEquals("23.06.2020", timeEntry.getDay(), "Wrong day");
+        Assertions.assertEquals(date, timeEntry.getDay(), "Wrong day");
+    }
+
+    @Test
+    void ensureCanGetCorrectStartTimeAsString() {
+
+        LocalDate today = LocalDate.now();
+
+        TimeEntry timeEntry = new TimeEntry(today.atTime(8, 30), today.atTime(9,0), "#ISSUE-123", "Meeting");
+
+        Assertions.assertNotNull(timeEntry.getStartTimeAsString(), "Start time is missing");
+        Assertions.assertEquals("08:30", timeEntry.getStartTimeAsString(), "Wrong start time");
+    }
+
+    @Test
+    void ensureCanGetCorrectEndTimeAsString() {
+
+        LocalDate today = LocalDate.now();
+
+        TimeEntry timeEntry = new TimeEntry(today.atTime(8, 30), today.atTime(9,0), "#ISSUE-123", "Meeting");
+
+        Assertions.assertNotNull(timeEntry.getEndTimeAsString(), "End time is missing");
+        Assertions.assertEquals("09:00", timeEntry.getEndTimeAsString(), "Wrong end time");
+    }
+
+    @Test
+    void ensureCanGetCorrectDayAsString() {
+
+        LocalDate date = LocalDate.of(2020, 6, 23);
+
+        TimeEntry timeEntry = new TimeEntry(date.atTime(8, 30), date.atTime(9,0), "#ISSUE-123", "Meeting");
+
+        Assertions.assertNotNull(timeEntry.getDayAsString(), "Day is missing");
+        Assertions.assertEquals("2020-06-23", timeEntry.getDayAsString(), "Wrong day");
     }
 
     @Test
