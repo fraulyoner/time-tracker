@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -32,6 +33,21 @@ class TimeEntryProviderImplTest {
         Mockito.verify(timeEntryDao).findByDay(today);
 
         Assertions.assertEquals(timeEntries, allTimeEntriesForDay, "Wrong list of time entries");
+
+    }
+
+    @Test
+    void ensureCanFindAllWorkDaysByUsingDao() {
+
+        LocalDate today = LocalDate.now();
+
+        Mockito.when(timeEntryDao.findAllDays()).thenReturn(Collections.singletonList(today));
+
+        List<LocalDate> allWorkDays = timeEntryProvider.getAllWorkDays();
+
+        Mockito.verify(timeEntryDao).findAllDays();
+
+        Assertions.assertEquals(allWorkDays.size(), 1, "Wrong number of work days");
 
     }
 

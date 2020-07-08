@@ -12,6 +12,7 @@ import java.util.List;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -27,17 +28,17 @@ class BaseControllerTest {
     @MockBean
     private TimeEntryProvider timeEntryProvider;
 
-
     @Test
-    void indexWithoutParameterShouldHaveDefault() throws Exception {
+    void indexShouldContainWorkDays() throws Exception {
+
+        List<LocalDate> days = Arrays.asList(LocalDate.of(2020, 6, 20), LocalDate.of(2020, 7, 1));
+        when(timeEntryProvider.getAllWorkDays()).thenReturn(days);
+
         mockMvc.perform(get("/")).andDo(print()).andExpect(status().isOk())
-                .andExpect(content().string(containsString("Hello World")));
-    }
+                .andExpect(content().string(containsString("2020-06-20")))
+                .andExpect(content().string(containsString("2020-07-01")));
 
-    @Test
-    void indexShouldContainName() throws Exception {
-        mockMvc.perform(get("/?name=Aljona")).andDo(print()).andExpect(status().isOk())
-                .andExpect(content().string(containsString("Hello Aljona")));
+        verify(timeEntryProvider).getAllWorkDays();
     }
 
     @Test

@@ -22,4 +22,9 @@ class TimeEntryProviderImpl implements TimeEntryProvider {
         return timeEntryDao.findByDay(day);
     }
 
+    @Override
+    public List<LocalDate> getAllWorkDays() {
+        return timeEntryDao.findAllDays();
+    }
+
 }

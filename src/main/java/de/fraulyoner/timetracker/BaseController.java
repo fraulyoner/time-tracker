@@ -15,12 +15,18 @@ import java.util.List;
 class BaseController {
 
     private static final String FORMAT_PATTERN_DATE = "yyyy-MM-dd";
+
     @Autowired
     private TimeEntryProvider timeEntryProvider;
 
     @GetMapping("/")
-    String index(@RequestParam(name = "name", required = false, defaultValue = "World") String name, Model model) {
-        model.addAttribute("name", name);
+    String index(Model model) {
+        List<LocalDate> workDays = timeEntryProvider.getAllWorkDays();
+        List<String> workDaysAsString = new ArrayList<>();
+
+        workDays.forEach(date -> workDaysAsString.add(date.format(DateTimeFormatter.ofPattern(FORMAT_PATTERN_DATE))));
+
+        model.addAttribute("workDays", workDaysAsString);
         return "index";
     }
 

@@ -6,4 +6,6 @@ import java.util.List;
 interface TimeEntryProvider {
 
     List<TimeEntry> getAllTimeEntriesForDay(LocalDate day);
+
+    List<LocalDate> getAllWorkDays();
 }
