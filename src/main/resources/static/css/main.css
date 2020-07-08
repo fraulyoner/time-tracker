@@ -13,3 +13,7 @@
  padding-bottom: 7.5rem;
  padding-top: 7.5rem
 }
+
+tr.no-border > td, th {
+  border-bottom: none;
+}

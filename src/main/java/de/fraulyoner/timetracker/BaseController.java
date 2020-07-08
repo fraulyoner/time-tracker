@@ -7,11 +7,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 class BaseController {
 
+    private static final String FORMAT_PATTERN_DATE = "yyyy-MM-dd";
     @Autowired
     private TimeEntryProvider timeEntryProvider;
 
@@ -22,12 +25,13 @@ class BaseController {
     }
 
     @GetMapping("/tracking")
-    String sampleTimeEntry(Model model) {
+    String sampleTimeEntry(@RequestParam("date") String date, Model model) {
 
-        LocalDate today = LocalDate.now();
-        List<TimeEntry> entries = timeEntryProvider.getAllTimeEntriesForDay(today);
+        LocalDate day = LocalDate.parse(date, DateTimeFormatter.ofPattern(FORMAT_PATTERN_DATE));
 
-        model.addAttribute("timeEntries", entries);
+        List<TimeEntry> entries = timeEntryProvider.getAllTimeEntriesForDay(day);
+
+        model.addAttribute("workDay", new WorkDay(day, entries));
 
         return "tracking";
     }

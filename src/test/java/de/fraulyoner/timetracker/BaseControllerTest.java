@@ -48,8 +48,8 @@ class BaseControllerTest {
 
         when(timeEntryProvider.getAllTimeEntriesForDay(any(LocalDate.class))).thenReturn(entries);
 
-        mockMvc.perform(get("/tracking")).andDo(print()).andExpect(status().isOk())
-                .andExpect(content().string(containsString("Einträge für 23.06.2020")))
+        mockMvc.perform(get("/tracking?date=2020-06-23")).andDo(print()).andExpect(status().isOk())
+                .andExpect(content().string(containsString("2020-06-23")))
                 .andExpect(content().string(containsString("08:30")))
                 .andExpect(content().string(containsString("09:00")))
                 .andExpect(content().string(containsString("Daily")));

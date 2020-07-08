@@ -32,6 +32,7 @@ class DummyDataCreator {
 
         createTimeEntry(new TimeEntry(day.atTime(8, 30), day.atTime(9, 0), "#123", "Daily"));
         createTimeEntry(new TimeEntry(day.atTime(9, 0), day.atTime(10, 0), "#123", "Organisation und Co."));
+        createTimeEntry(new TimeEntry(day.atTime(13, 15), day.atTime(14, 0), "#123", "Organisation und Co."));
 
     }
 
