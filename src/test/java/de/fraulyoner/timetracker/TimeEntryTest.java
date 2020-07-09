@@ -125,39 +125,6 @@ class TimeEntryTest {
     }
 
     @Test
-    void ensureCanGetCorrectStartTimeAsString() {
-
-        LocalDate today = LocalDate.now();
-
-        TimeEntry timeEntry = new TimeEntry(today, LocalTime.of(8, 30), LocalTime.of(9,0), "#ISSUE-123", "Meeting");
-
-        Assertions.assertNotNull(timeEntry.getStartTimeAsString(), "Start time is missing");
-        Assertions.assertEquals("08:30", timeEntry.getStartTimeAsString(), "Wrong start time");
-    }
-
-    @Test
-    void ensureCanGetCorrectEndTimeAsString() {
-
-        LocalDate today = LocalDate.now();
-
-        TimeEntry timeEntry = new TimeEntry(today, LocalTime.of(8, 30), LocalTime.of(9,0), "#ISSUE-123", "Meeting");
-
-        Assertions.assertNotNull(timeEntry.getEndTimeAsString(), "End time is missing");
-        Assertions.assertEquals("09:00", timeEntry.getEndTimeAsString(), "Wrong end time");
-    }
-
-    @Test
-    void ensureCanGetCorrectDayAsString() {
-
-        LocalDate date = LocalDate.of(2020, 6, 23);
-
-        TimeEntry timeEntry = new TimeEntry(date, LocalTime.of(8, 30), LocalTime.of(9,0), "#ISSUE-123", "Meeting");
-
-        Assertions.assertNotNull(timeEntry.getDayAsString(), "Day is missing");
-        Assertions.assertEquals("2020-06-23", timeEntry.getDayAsString(), "Wrong day");
-    }
-
-    @Test
     void ensureCanGetCorrectDuration() {
 
         LocalDate today = LocalDate.now();

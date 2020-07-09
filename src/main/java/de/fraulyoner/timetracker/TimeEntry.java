@@ -7,14 +7,10 @@ import javax.persistence.Entity;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 
 @Entity
 class TimeEntry extends AbstractPersistable<Integer> {
 
-    // TODO: Think about if this class is the right place for doing date formatting things
-    private static final String FORMAT_PATTERN_TIME = "HH:mm";
-    private static final String FORMAT_PATTERN_DATE = "yyyy-MM-dd";
 
     private LocalTime startTime;
     private LocalTime endTime;
@@ -60,21 +56,6 @@ class TimeEntry extends AbstractPersistable<Integer> {
         return day;
     }
 
-    String getStartTimeAsString() {
-
-        return startTime.format(DateTimeFormatter.ofPattern(FORMAT_PATTERN_TIME));
-    }
-
-    String getEndTimeAsString() {
-
-        return endTime.format(DateTimeFormatter.ofPattern(FORMAT_PATTERN_TIME));
-    }
-
-    String getDayAsString() {
-
-        return day.format(DateTimeFormatter.ofPattern(FORMAT_PATTERN_DATE));
-    }
-
     float getDuration() {
 
         Duration duration = Duration.between(startTime, endTime);
@@ -85,12 +66,12 @@ class TimeEntry extends AbstractPersistable<Integer> {
 
     @Override
     public String toString() {
-        return "TimeEntry {" +
-                "day=" + getDayAsString() +
-                ", start=" + getStartTimeAsString() +
-                ", end=" + getEndTimeAsString() +
-                ", issue=" + issue +
-                ", description=" + description +
+        return "TimeEntry{" +
+                "startTime=" + startTime +
+                ", endTime=" + endTime +
+                ", day=" + day +
+                ", issue='" + issue + '\'' +
+                ", description='" + description + '\'' +
                 '}';
     }
 }
