@@ -52,4 +52,13 @@ class TimeEntryProviderImplTest {
 
     }
 
+    @Test
+    void ensureCanAddNewTimeEntry() {
+
+        TimeEntry timeEntryMock = Mockito.mock(TimeEntry.class);
+
+        timeEntryProvider.addNewTimeEntry(timeEntryMock);
+
+        Mockito.verify(timeEntryDao).save(timeEntryMock);
+    }
 }

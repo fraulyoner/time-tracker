@@ -8,17 +8,18 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
-import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(BaseController.class)
 class BaseControllerTest {
@@ -46,15 +47,53 @@ class BaseControllerTest {
     void trackingShouldContainEntryInformation() throws Exception {
 
         LocalDate day = LocalDate.of(2020, 6, 23);
-        List<TimeEntry> entries = Arrays.asList(new TimeEntry(day, LocalTime.of(8, 30), LocalTime.of(9, 0), "#123","Daily"));
+        List<TimeEntry> entries = Collections.singletonList(new TimeEntry(day, LocalTime.of(8, 30), LocalTime.of(9, 0), "#123", "Daily"));
 
         when(timeEntryProvider.getAllTimeEntriesForDay(any(LocalDate.class))).thenReturn(entries);
 
-        mockMvc.perform(get("/tracking?date=2020-06-23")).andDo(print()).andExpect(status().isOk())
+        mockMvc.perform(get("/tracking").param("date", "2020-06-23")).andDo(print())
+                .andExpect(status().isOk())
                 .andExpect(content().string(containsString("2020-06-23")))
                 .andExpect(content().string(containsString("08:30")))
                 .andExpect(content().string(containsString("09:00")))
                 .andExpect(content().string(containsString("Daily")));
+
+    }
+
+    @Test
+    void trackingWithoutExplicitDateShouldFetchEntriesForToday() throws Exception {
+
+        LocalDate today = LocalDate.now();
+        List<TimeEntry> entries = Collections.singletonList(new TimeEntry(today, LocalTime.of(8, 30), LocalTime.of(9, 0), "#123", "Daily"));
+
+        when(timeEntryProvider.getAllTimeEntriesForDay(any(LocalDate.class))).thenReturn(entries);
+
+        mockMvc.perform(get("/tracking")).andDo(print()).andExpect(status().isOk())
+                .andExpect(content().string(containsString("08:30")))
+                .andExpect(content().string(containsString("09:00")))
+                .andExpect(content().string(containsString("Daily")));
+
+    }
+
+    @Test
+    void addNewEntryShouldFillModel() throws Exception {
+
+        mockMvc.perform(get("/tracking/new").param("date", "2020-06-23")).andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(model().attributeExists("timeEntry"))
+                .andExpect(content().string(containsString("name=\"day\" value=\"2020-06-23\"")));
+
+    }
+
+    @Test
+    void addNewEntryWithoutExplicitDateShouldWork() throws Exception {
+
+        String date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+
+        mockMvc.perform(get("/tracking/new")).andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(model().attributeExists("timeEntry"))
+                .andExpect(content().string(containsString("name=\"day\" value=\"" + date + "\"")));
 
     }
 

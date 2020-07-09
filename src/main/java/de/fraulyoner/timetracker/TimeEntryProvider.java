@@ -8,4 +8,6 @@ interface TimeEntryProvider {
     List<TimeEntry> getAllTimeEntriesForDay(LocalDate day);
 
     List<LocalDate> getAllWorkDays();
+
+    TimeEntry addNewTimeEntry(TimeEntry timeEntry);
 }

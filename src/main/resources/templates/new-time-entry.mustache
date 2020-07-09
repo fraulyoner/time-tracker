@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="UTF-8" />
-    <title>Time Tracker | Einträge für {{workDay.day}}</title>
+    <title>Time Tracker | Neuer Eintrag</title>
     <link rel="stylesheet" type="text/css" href="/css/normalize.css"/>
     <link rel="stylesheet" type="text/css" href="/css/milligram.min.css"/>
     <link rel="stylesheet" type="text/css" href="/css/main.css"/>
@@ -15,63 +15,23 @@
 <main class="wrapper">
 
     <div class="container">
-        <h1>{{workDay.day}}</h1>
+        <h1>Neuer Eintrag</h1>
 
-        <h2>Zeiten</h2>
-        <table>
-            <thead>
-            <tr>
-                <th>Start</th>
-                <th>Ende</th>
-                <th>Ticket</th>
-                <th>Beschreibung</th>
-                <th>Dauer</th>
-            </tr>
-            </thead>
-            <tbody>
-            {{#workDay.timeEntries}}
-            <tr>
-                <td>{{startTimeAsString}}</td>
-                <td>{{endTimeAsString}}</td>
-                <td>{{issue}}</td>
-                <td>{{description}}</td>
-                <td>{{duration}}</td>
-            </tr>
-            {{/workDay.timeEntries}}
-            <tr class="no-border">
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td><b>{{workDay.workDuration}}</b></td>
-            </tr>
-            </tbody>
-        </table>
-
-        <h2>Buchen</h2>
-        <table>
-            <thead>
-            <tr>
-                <th>Ticket</th>
-                <th>Beschreibung</th>
-                <th>Dauer</th>
-            </tr>
-            </thead>
-            <tbody>
-            {{#workDay.trackingProposals}}
-                <tr>
-                    <td>{{issue}}</td>
-                    <td>{{description}}</td>
-                    <td>{{duration}}</td>
-                </tr>
-            {{/workDay.trackingProposals}}
-            <tr class="no-border">
-                <td></td>
-                <td></td>
-                <td><b>{{workDay.workDuration}}</b></td>
-            </tr>
-            </tbody>
-        </table>
+        <form name="timeEntry" method="POST" action="/tracking/new">
+            <fieldset>
+                <label for="dayField">Datum</label>
+                <input type="date" name="day" value="{{#timeEntry.day}}{{timeEntry.day}}{{/timeEntry.day}}" placeholder="yyyy-MM-dd" id="dayField">
+                <label for="startField">Start</label>
+                <input type="text" name="startTime" value="{{#timeEntry.startTime}}{{timeEntry.startTime}}{{/timeEntry.startTime}}" placeholder="08:30" id="startField">
+                <label for="endField">Ende</label>
+                <input type="text" name="endTime" value="{{#timeEntry.endTime}}{{timeEntry.endTime}}{{/timeEntry.endTime}}" placeholder="09:00" id="endField">
+                <label for="issueField">Issue</label>
+                <input type="text" name="issue" value="{{#timeEntry.issue}}{{timeEntry.issue}}{{/timeEntry.issue}}" placeholder="#123" id="issueField">
+                <label for="descriptionField">Beschreibung</label>
+                <input type="text" name="description" value="{{#timeEntry.description}}{{timeEntry.description}}{{/timeEntry.description}}" placeholder="Daily" id="descriptionField">
+                <input class="button-primary" type="submit" value="Speichern">
+            </fieldset>
+        </form>
     </div>
 
 </main>

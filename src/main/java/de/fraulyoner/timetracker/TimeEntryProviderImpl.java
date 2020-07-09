@@ -27,4 +27,9 @@ class TimeEntryProviderImpl implements TimeEntryProvider {
         return timeEntryDao.findAllDays();
     }
 
+    @Override
+    public TimeEntry addNewTimeEntry(TimeEntry timeEntry) {
+        return timeEntryDao.save(timeEntry);
+    }
+
 }

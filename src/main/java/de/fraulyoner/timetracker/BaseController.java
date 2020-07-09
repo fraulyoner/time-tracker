@@ -22,13 +22,39 @@ class BaseController {
     }
 
     @GetMapping("/tracking")
-    String timeEntry(@RequestParam("date") LocalDate day, Model model) {
+    String timeEntry(@RequestParam(value = "date", required = false) LocalDate day, Model model) {
+
+        if (day == null) {
+            day = LocalDate.now();
+        }
 
         List<TimeEntry> entries = timeEntryProvider.getAllTimeEntriesForDay(day);
 
         model.addAttribute("workDay", new WorkDay(day, entries));
 
         return "tracking";
+    }
+
+    @GetMapping("/tracking/new")
+    String newTimeEntry(@RequestParam(value = "date", required = false) LocalDate day, Model model) {
+
+        if (day == null) {
+            day = LocalDate.now();
+        }
+
+        model.addAttribute("timeEntry", new TimeEntryDto(day));
+
+        return "new-time-entry";
+    }
+
+    @PostMapping("/tracking/new")
+    String addTimeEntry(@ModelAttribute("timeEntry") TimeEntryDto timeEntryDto) {
+
+        // TODO: Validate timeEntryDto!
+
+        TimeEntry timeEntry = timeEntryProvider.addNewTimeEntry(timeEntryDto.toTimeEntry());
+
+        return "redirect:/tracking?date=" + timeEntry.getDay();
     }
 
 }

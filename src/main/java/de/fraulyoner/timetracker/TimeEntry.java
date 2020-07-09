@@ -11,7 +11,6 @@ import java.time.LocalTime;
 @Entity
 class TimeEntry extends AbstractPersistable<Integer> {
 
-
     private LocalTime startTime;
     private LocalTime endTime;
     private LocalDate day;
