@@ -10,8 +10,14 @@
 }
 
 .wrapper > .container {
- padding-bottom: 7.5rem;
- padding-top: 7.5rem
+ padding-bottom: 3.5rem;
+ padding-top: 3.5rem
+}
+
+.wrapper > .nav {
+  padding: 2.0rem;
+  max-width: 80rem;
+  margin: 0 auto;
 }
 
 tr.no-border > td, th {
