@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Time Tracker | Einträge für {{workDay.day}}</title>
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/milligram.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/main.css"/>
+</head>
+
+<body>
+
+<main class="wrapper">
+
+    <div class="container">
+        <h1>{{workDay.day}}</h1>
+
+        <h2>Zeiten</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Start</th>
+                <th>Ende</th>
+                <th>Ticket</th>
+                <th>Beschreibung</th>
+                <th>Dauer</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#workDay.timeEntries}}
+            <tr>
+                <td>{{startTimeAsString}}</td>
+                <td>{{endTimeAsString}}</td>
+                <td>{{issue}}</td>
+                <td>{{description}}</td>
+                <td>{{duration}}</td>
+            </tr>
+            {{/workDay.timeEntries}}
+            <tr class="no-border">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><b>{{workDay.workDuration}}</b></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <h2>Buchen</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Ticket</th>
+                <th>Beschreibung</th>
+                <th>Dauer</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#workDay.trackingProposals}}
+                <tr>
+                    <td>{{issue}}</td>
+                    <td>{{description}}</td>
+                    <td>{{duration}}</td>
+                </tr>
+            {{/workDay.trackingProposals}}
+            <tr class="no-border">
+                <td></td>
+                <td></td>
+                <td><b>{{workDay.workDuration}}</b></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</main>
+
+</body>
+
+</html>

@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.time.LocalDate;
-import java.util.Arrays;
+import java.time.LocalTime;
 import java.util.Collections;
 import java.util.List;
 
@@ -20,8 +20,9 @@ class TimeEntryProviderImplTest {
         LocalDate today = LocalDate.now();
         List<TimeEntry> timeEntries = Collections.singletonList(
                 new TimeEntry(
-                        today.atTime(9, 0),
-                        today.atTime(10, 30),
+                        today,
+                        LocalTime.of(9, 0),
+                        LocalTime.of(10, 30),
                         "issue123",
                         "very important work")
                 );

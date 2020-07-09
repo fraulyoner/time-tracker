@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Service
 @ConditionalOnProperty(name = "testdata.create",
@@ -30,9 +31,9 @@ class DummyDataCreator {
 
         LOG.info("Creating test data for " + day.toString());
 
-        createTimeEntry(new TimeEntry(day.atTime(8, 30), day.atTime(9, 0), "#123", "Daily"));
-        createTimeEntry(new TimeEntry(day.atTime(9, 0), day.atTime(10, 0), "#123", "Organisation und Co."));
-        createTimeEntry(new TimeEntry(day.atTime(13, 15), day.atTime(14, 0), "#123", "Organisation und Co."));
+        createTimeEntry(new TimeEntry(day, LocalTime.of(8, 30), LocalTime.of(9, 0), "#123", "Daily"));
+        createTimeEntry(new TimeEntry(day, LocalTime.of(9, 0), LocalTime.of(10, 0), "#123", "Organisation und Co."));
+        createTimeEntry(new TimeEntry(day, LocalTime.of(13, 15), LocalTime.of(14, 0), "#123", "Organisation und Co."));
 
     }
 

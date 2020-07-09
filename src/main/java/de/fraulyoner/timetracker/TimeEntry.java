@@ -6,7 +6,7 @@ import org.springframework.util.Assert;
 import javax.persistence.Entity;
 import java.time.Duration;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 @Entity
@@ -16,8 +16,8 @@ class TimeEntry extends AbstractPersistable<Integer> {
     private static final String FORMAT_PATTERN_TIME = "HH:mm";
     private static final String FORMAT_PATTERN_DATE = "yyyy-MM-dd";
 
-    private LocalDateTime start;
-    private LocalDateTime end;
+    private LocalTime startTime;
+    private LocalTime endTime;
     private LocalDate day;
     private String issue;
     private String description;
@@ -25,27 +25,27 @@ class TimeEntry extends AbstractPersistable<Integer> {
     // Just for Hibernate, do not use this in code
     private TimeEntry() {}
 
-    TimeEntry(LocalDateTime start, LocalDateTime end, String issue, String description) {
-        Assert.notNull(start, "Start must not be null");
-        Assert.notNull(end, "End must not be null");
+    TimeEntry(LocalDate day, LocalTime startTime, LocalTime endTime, String issue, String description) {
+        Assert.notNull(day, "Day must not be null");
+        Assert.notNull(startTime, "Start time must not be null");
+        Assert.notNull(endTime, "End time must not be null");
         Assert.hasText(issue, "Issue must not be empty");
         Assert.hasText(description, "Description must not be empty");
-        Assert.isTrue(start.isBefore(end), "Start must be before end");
-        Assert.isTrue(start.toLocalDate().equals(end.toLocalDate()), "Start and end must be on the same day");
+        Assert.isTrue(startTime.isBefore(endTime), "Start time must be before end time");
 
-        this.start = start;
-        this.end = end;
-        this.day = start.toLocalDate();
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.day = day;
         this.issue = issue;
         this.description = description;
     }
 
-    LocalDateTime getStart() {
-        return start;
+    LocalTime getStartTime() {
+        return startTime;
     }
 
-    LocalDateTime getEnd() {
-        return end;
+    LocalTime getEndTime() {
+        return endTime;
     }
 
     String getDescription() {
@@ -62,22 +62,22 @@ class TimeEntry extends AbstractPersistable<Integer> {
 
     String getStartTimeAsString() {
 
-        return start.format(DateTimeFormatter.ofPattern(FORMAT_PATTERN_TIME));
+        return startTime.format(DateTimeFormatter.ofPattern(FORMAT_PATTERN_TIME));
     }
 
     String getEndTimeAsString() {
 
-        return end.format(DateTimeFormatter.ofPattern(FORMAT_PATTERN_TIME));
+        return endTime.format(DateTimeFormatter.ofPattern(FORMAT_PATTERN_TIME));
     }
 
     String getDayAsString() {
 
-        return start.format(DateTimeFormatter.ofPattern(FORMAT_PATTERN_DATE));
+        return day.format(DateTimeFormatter.ofPattern(FORMAT_PATTERN_DATE));
     }
 
     float getDuration() {
 
-        Duration duration = Duration.between(start, end);
+        Duration duration = Duration.between(startTime, endTime);
         long durationInMinutes = duration.toMinutes();
 
         return (float) durationInMinutes / 60;

@@ -31,7 +31,7 @@ class BaseController {
     }
 
     @GetMapping("/tracking")
-    String sampleTimeEntry(@RequestParam("date") String date, Model model) {
+    String timeEntry(@RequestParam("date") String date, Model model) {
 
         LocalDate day = LocalDate.parse(date, DateTimeFormatter.ofPattern(FORMAT_PATTERN_DATE));
 

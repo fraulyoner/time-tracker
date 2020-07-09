@@ -7,6 +7,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -45,7 +46,7 @@ class BaseControllerTest {
     void trackingShouldContainEntryInformation() throws Exception {
 
         LocalDate day = LocalDate.of(2020, 6, 23);
-        List<TimeEntry> entries = Arrays.asList(new TimeEntry(day.atTime(8, 30), day.atTime(9, 0), "#123","Daily"));
+        List<TimeEntry> entries = Arrays.asList(new TimeEntry(day, LocalTime.of(8, 30), LocalTime.of(9, 0), "#123","Daily"));
 
         when(timeEntryProvider.getAllTimeEntriesForDay(any(LocalDate.class))).thenReturn(entries);
 
