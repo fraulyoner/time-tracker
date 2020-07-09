@@ -19,7 +19,7 @@ class TimeEntryProviderImpl implements TimeEntryProvider {
     @Override
     public List<TimeEntry> getAllTimeEntriesForDay(LocalDate day) {
 
-        return timeEntryDao.findByDay(day);
+        return timeEntryDao.findByDayOrderByStartTime(day);
     }
 
     @Override

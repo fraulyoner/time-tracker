@@ -27,11 +27,11 @@ class TimeEntryProviderImplTest {
                         "very important work")
                 );
 
-        Mockito.when(timeEntryDao.findByDay(Mockito.any(LocalDate.class))).thenReturn(timeEntries);
+        Mockito.when(timeEntryDao.findByDayOrderByStartTime(Mockito.any(LocalDate.class))).thenReturn(timeEntries);
 
         List<TimeEntry> allTimeEntriesForDay = timeEntryProvider.getAllTimeEntriesForDay(today);
 
-        Mockito.verify(timeEntryDao).findByDay(today);
+        Mockito.verify(timeEntryDao).findByDayOrderByStartTime(today);
 
         Assertions.assertEquals(timeEntries, allTimeEntriesForDay, "Wrong list of time entries");
 

@@ -56,11 +56,33 @@ class TimeEntryDaoTest {
         timeEntryDao.save(timeEntry2);
         timeEntryDao.save(timeEntry3);
 
-        List<TimeEntry> timeEntries = timeEntryDao.findByDay(date1);
+        List<TimeEntry> timeEntries = timeEntryDao.findByDayOrderByStartTime(date1);
 
         Assertions.assertNotNull(timeEntries, "Missing time entries");
         Assertions.assertEquals(1, timeEntries.size(), "Wrong number of time entries");
         Assertions.assertEquals(LocalTime.of(8, 30), timeEntries.get(0).getStartTime(), "Wrong time entry");
+    }
+
+    @Test
+    void ensureFoundTimeEntriesForDayAreSortedByStartTime() {
+
+        LocalDate date = LocalDate.of(2020, 7, 1);
+
+        TimeEntry timeEntry1 = new TimeEntry(date, LocalTime.of(8, 30), LocalTime.of(8, 45), "123", "first");
+        TimeEntry timeEntry2 = new TimeEntry(date, LocalTime.of(10, 30), LocalTime.of(11, 0), "123", "third");
+        TimeEntry timeEntry3 = new TimeEntry(date, LocalTime.of(9, 0), LocalTime.of(9, 30), "123", "second");
+
+        timeEntryDao.save(timeEntry1);
+        timeEntryDao.save(timeEntry2);
+        timeEntryDao.save(timeEntry3);
+
+        List<TimeEntry> timeEntries = timeEntryDao.findByDayOrderByStartTime(date);
+
+        Assertions.assertNotNull(timeEntries, "Missing time entries");
+        Assertions.assertEquals(3, timeEntries.size(), "Wrong number of time entries");
+        Assertions.assertEquals(LocalTime.of(8, 30), timeEntries.get(0).getStartTime(), "Wrong time entry");
+        Assertions.assertEquals(LocalTime.of(9, 0), timeEntries.get(1).getStartTime(), "Wrong time entry");
+        Assertions.assertEquals(LocalTime.of(10, 30), timeEntries.get(2).getStartTime(), "Wrong time entry");
     }
 
     @Test

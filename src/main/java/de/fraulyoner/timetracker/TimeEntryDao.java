@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 interface TimeEntryDao extends JpaRepository<TimeEntry, Integer> {
 
-    List<TimeEntry> findByDay(LocalDate day);
+    List<TimeEntry> findByDayOrderByStartTime(LocalDate day);
 
     @Query("SELECT DISTINCT day FROM TimeEntry")
     List<LocalDate> findAllDays();
