@@ -34,13 +34,13 @@
                 <td>{{endTime}}</td>
                 <td>{{issue}} – {{description}}</td>
                 <td>{{duration}}</td>
-                <td>{{#id}}<a class="button button-outline" href="/tracking/{{id}}">Edit</a>{{/id}}</td>
+                <td>{{#id}}<a class="button button-outline" href="/entries/{{id}}">Edit</a>{{/id}}</td>
             </tr>
             {{/workDay.timeEntries}}
             <tr class="no-border">
                 <td colspan="3"></td>
                 <td><b>{{workDay.workDuration}}</b></td>
-                <td><a class="button" href="/tracking/new?date={{workDay.day}}">Neu</a></td>
+                <td><a class="button" href="/entries/new?date={{workDay.day}}">Neu</a></td>
             </tr>
             </tbody>
         </table>

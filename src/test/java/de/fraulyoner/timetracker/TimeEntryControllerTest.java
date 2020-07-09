@@ -21,8 +21,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(BaseController.class)
-class BaseControllerTest {
+@WebMvcTest(TimeEntryController.class)
+class TimeEntryControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -51,7 +51,7 @@ class BaseControllerTest {
 
         when(timeEntryProvider.getAllTimeEntriesForDay(any(LocalDate.class))).thenReturn(entries);
 
-        mockMvc.perform(get("/tracking").param("date", "2020-06-23")).andDo(print())
+        mockMvc.perform(get("/entries").param("date", "2020-06-23")).andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("2020-06-23")))
                 .andExpect(content().string(containsString("08:30")))
@@ -68,7 +68,7 @@ class BaseControllerTest {
 
         when(timeEntryProvider.getAllTimeEntriesForDay(any(LocalDate.class))).thenReturn(entries);
 
-        mockMvc.perform(get("/tracking")).andDo(print()).andExpect(status().isOk())
+        mockMvc.perform(get("/entries")).andDo(print()).andExpect(status().isOk())
                 .andExpect(content().string(containsString("08:30")))
                 .andExpect(content().string(containsString("09:00")))
                 .andExpect(content().string(containsString("Daily")));
@@ -78,7 +78,7 @@ class BaseControllerTest {
     @Test
     void addNewEntryShouldFillModel() throws Exception {
 
-        mockMvc.perform(get("/tracking/new").param("date", "2020-06-23")).andDo(print())
+        mockMvc.perform(get("/entries/new").param("date", "2020-06-23")).andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("timeEntry"))
                 .andExpect(content().string(containsString("name=\"day\" value=\"2020-06-23\"")));
@@ -90,7 +90,7 @@ class BaseControllerTest {
 
         String date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
-        mockMvc.perform(get("/tracking/new")).andDo(print())
+        mockMvc.perform(get("/entries/new")).andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("timeEntry"))
                 .andExpect(content().string(containsString("name=\"day\" value=\"" + date + "\"")));

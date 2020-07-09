@@ -17,7 +17,7 @@
     <div class="container">
         <h1>Neuer Eintrag</h1>
 
-        <form name="timeEntry" method="POST" action="{{#id}}/tracking/{{id}}{{/id}}{{^id}}/tracking/new{{/id}}">
+        <form name="timeEntry" method="POST" action="{{#id}}/entries/{{id}}{{/id}}{{^id}}/entries/new{{/id}}">
             <fieldset>
                 <input type="hidden" name="id" value="{{#id}}{{id}}{{/id}}">
                 <label for="dayField">Datum</label>
@@ -31,7 +31,7 @@
                 <label for="descriptionField">Beschreibung</label>
                 <input type="text" name="description" value="{{#timeEntry.description}}{{timeEntry.description}}{{/timeEntry.description}}" placeholder="Daily" id="descriptionField">
                 <input class="button-primary" type="submit" value="Speichern">
-                <a class="button button-outline" href="/tracking?date={{timeEntry.day}}">Abbrechen</a>
+                <a class="button button-outline" href="/entries?date={{timeEntry.day}}">Abbrechen</a>
             </fieldset>
         </form>
     </div>

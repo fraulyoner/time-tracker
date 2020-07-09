@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-class BaseController {
+class TimeEntryController {
 
     @Autowired
     private TimeEntryProvider timeEntryProvider;
@@ -22,7 +22,7 @@ class BaseController {
         return "index";
     }
 
-    @GetMapping("/tracking")
+    @GetMapping("/entries")
     String timeEntries(@RequestParam(value = "date", required = false) LocalDate day, Model model) {
 
         if (day == null) {
@@ -33,10 +33,10 @@ class BaseController {
 
         model.addAttribute("workDay", new WorkDay(day, entries));
 
-        return "tracking";
+        return "entries";
     }
 
-    @GetMapping("/tracking/new")
+    @GetMapping("/entries/new")
     String newTimeEntry(@RequestParam(value = "date", required = false) LocalDate day, Model model) {
 
         if (day == null) {
@@ -48,38 +48,38 @@ class BaseController {
 
         model.addAttribute("timeEntry", timeEntry);
 
-        return "new-time-entry";
+        return "entry";
     }
 
-    @PostMapping("/tracking/new")
+    @PostMapping("/entries/new")
     String addTimeEntry(@ModelAttribute("timeEntry") TimeEntry timeEntry) {
 
         // TODO: Validate timeEntryDto!
 
         timeEntryProvider.addOrUpdateTimeEntry(timeEntry);
 
-        return "redirect:/tracking?date=" + timeEntry.getDay();
+        return "redirect:/entries?date=" + timeEntry.getDay();
     }
 
-    @GetMapping("/tracking/{id}")
+    @GetMapping("/entries/{id}")
     String editTimeEntry(@PathVariable("id") Integer id, Model model) {
 
         Optional<TimeEntry> timeEntryOptional = timeEntryProvider.getById(id);
 
         if(timeEntryOptional.isPresent()) {
             model.addAttribute("timeEntry", timeEntryOptional.get());
-            return "new-time-entry";
+            return "entry";
         }
 
         return "redirect:/";
     }
 
-    @PostMapping("/tracking/{id}")
+    @PostMapping("/entries/{id}")
     String updateTimeEntry(@ModelAttribute("timeEntry") TimeEntry timeEntry) {
 
         timeEntryProvider.addOrUpdateTimeEntry(timeEntry);
 
-        return "redirect:/tracking?date=" + timeEntry.getDay();
+        return "redirect:/entries?date=" + timeEntry.getDay();
     }
 
 }
