@@ -57,7 +57,7 @@ class TimeEntryProviderImplTest {
 
         TimeEntry timeEntryMock = Mockito.mock(TimeEntry.class);
 
-        timeEntryProvider.addNewTimeEntry(timeEntryMock);
+        timeEntryProvider.addOrUpdateTimeEntry(timeEntryMock);
 
         Mockito.verify(timeEntryDao).save(timeEntryMock);
     }

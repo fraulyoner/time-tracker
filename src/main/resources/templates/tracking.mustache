@@ -16,17 +16,15 @@
 
     <div class="container">
         <h1>{{workDay.day}}</h1>
-        <a class="button" href="/tracking/new?date={{workDay.day}}">Neu</a>
 
-        <h2>Zeiten</h2>
         <table>
             <thead>
             <tr>
                 <th>Start</th>
                 <th>Ende</th>
-                <th>Ticket</th>
                 <th>Beschreibung</th>
                 <th>Dauer</th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -34,40 +32,29 @@
             <tr>
                 <td>{{startTime}}</td>
                 <td>{{endTime}}</td>
-                <td>{{issue}}</td>
-                <td>{{description}}</td>
+                <td>{{issue}} – {{description}}</td>
                 <td>{{duration}}</td>
+                <td>{{#id}}<a class="button button-outline" href="/tracking/{{id}}">Edit</a>{{/id}}</td>
             </tr>
             {{/workDay.timeEntries}}
             <tr class="no-border">
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td colspan="3"></td>
                 <td><b>{{workDay.workDuration}}</b></td>
+                <td><a class="button" href="/tracking/new?date={{workDay.day}}">Neu</a></td>
             </tr>
             </tbody>
         </table>
 
         <h2>Buchen</h2>
-        <table>
-            <thead>
-            <tr>
-                <th>Ticket</th>
-                <th>Beschreibung</th>
-                <th>Dauer</th>
-            </tr>
-            </thead>
+        <table style="width: auto;">
             <tbody>
             {{#workDay.trackingProposals}}
                 <tr>
-                    <td>{{issue}}</td>
-                    <td>{{description}}</td>
+                    <td>{{issue}} – {{description}}</td>
                     <td>{{duration}}</td>
                 </tr>
             {{/workDay.trackingProposals}}
             <tr class="no-border">
-                <td></td>
                 <td></td>
                 <td><b>{{workDay.workDuration}}</b></td>
             </tr>

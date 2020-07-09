@@ -2,6 +2,7 @@ package de.fraulyoner.timetracker;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 interface TimeEntryProvider {
 
@@ -9,5 +10,7 @@ interface TimeEntryProvider {
 
     List<LocalDate> getAllWorkDays();
 
-    TimeEntry addNewTimeEntry(TimeEntry timeEntry);
+    void addOrUpdateTimeEntry(TimeEntry timeEntry);
+
+    Optional<TimeEntry> getById(Integer id);
 }

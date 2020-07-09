@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 class TimeEntryProviderImpl implements TimeEntryProvider {
@@ -28,8 +29,13 @@ class TimeEntryProviderImpl implements TimeEntryProvider {
     }
 
     @Override
-    public TimeEntry addNewTimeEntry(TimeEntry timeEntry) {
-        return timeEntryDao.save(timeEntry);
+    public void addOrUpdateTimeEntry(TimeEntry timeEntry) {
+        timeEntryDao.save(timeEntry);
+    }
+
+    @Override
+    public Optional<TimeEntry> getById(Integer id) {
+        return timeEntryDao.findById(id);
     }
 
 }

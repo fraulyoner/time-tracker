@@ -17,8 +17,9 @@ class TimeEntry extends AbstractPersistable<Integer> {
     private String issue;
     private String description;
 
-    // Just for Hibernate, do not use this in code
-    private TimeEntry() {}
+    TimeEntry() {
+        /* OK */
+    }
 
     TimeEntry(LocalDate day, LocalTime startTime, LocalTime endTime, String issue, String description) {
         Assert.notNull(day, "Day must not be null");
@@ -35,27 +36,55 @@ class TimeEntry extends AbstractPersistable<Integer> {
         this.description = description;
     }
 
-    LocalTime getStartTime() {
+    public Integer getId() {
+        return super.getId();
+    }
+
+    public void setId(Integer id) {
+        super.setId(id);
+    }
+
+    public LocalTime getStartTime() {
         return startTime;
     }
 
-    LocalTime getEndTime() {
+    public void setStartTime(LocalTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public LocalTime getEndTime() {
         return endTime;
     }
 
-    String getDescription() {
-        return description;
+    public void setEndTime(LocalTime endTime) {
+        this.endTime = endTime;
     }
 
-    String getIssue() {
-        return issue;
-    }
-
-    LocalDate getDay() {
+    public LocalDate getDay() {
         return day;
     }
 
-    float getDuration() {
+    public void setDay(LocalDate day) {
+        this.day = day;
+    }
+
+    public String getIssue() {
+        return issue;
+    }
+
+    public void setIssue(String issue) {
+        this.issue = issue;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public float getDuration() {
 
         Duration duration = Duration.between(startTime, endTime);
         long durationInMinutes = duration.toMinutes();

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 class BaseController {
@@ -22,7 +23,7 @@ class BaseController {
     }
 
     @GetMapping("/tracking")
-    String timeEntry(@RequestParam(value = "date", required = false) LocalDate day, Model model) {
+    String timeEntries(@RequestParam(value = "date", required = false) LocalDate day, Model model) {
 
         if (day == null) {
             day = LocalDate.now();
@@ -42,17 +43,41 @@ class BaseController {
             day = LocalDate.now();
         }
 
-        model.addAttribute("timeEntry", new TimeEntryDto(day));
+        TimeEntry timeEntry = new TimeEntry();
+        timeEntry.setDay(day);
+
+        model.addAttribute("timeEntry", timeEntry);
 
         return "new-time-entry";
     }
 
     @PostMapping("/tracking/new")
-    String addTimeEntry(@ModelAttribute("timeEntry") TimeEntryDto timeEntryDto) {
+    String addTimeEntry(@ModelAttribute("timeEntry") TimeEntry timeEntry) {
 
         // TODO: Validate timeEntryDto!
 
-        TimeEntry timeEntry = timeEntryProvider.addNewTimeEntry(timeEntryDto.toTimeEntry());
+        timeEntryProvider.addOrUpdateTimeEntry(timeEntry);
+
+        return "redirect:/tracking?date=" + timeEntry.getDay();
+    }
+
+    @GetMapping("/tracking/{id}")
+    String editTimeEntry(@PathVariable("id") Integer id, Model model) {
+
+        Optional<TimeEntry> timeEntryOptional = timeEntryProvider.getById(id);
+
+        if(timeEntryOptional.isPresent()) {
+            model.addAttribute("timeEntry", timeEntryOptional.get());
+            return "new-time-entry";
+        }
+
+        return "redirect:/";
+    }
+
+    @PostMapping("/tracking/{id}")
+    String updateTimeEntry(@ModelAttribute("timeEntry") TimeEntry timeEntry) {
+
+        timeEntryProvider.addOrUpdateTimeEntry(timeEntry);
 
         return "redirect:/tracking?date=" + timeEntry.getDay();
     }
