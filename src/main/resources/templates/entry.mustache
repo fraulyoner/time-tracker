@@ -19,6 +19,7 @@
         <h1>Neuer Eintrag</h1>
 
         <form name="timeEntry" method="POST" action="{{#id}}/entries/{{id}}{{/id}}{{^id}}/entries/new{{/id}}">
+            {{#error}}<span class="form-error">Bitte korrigiere deine Eingaben.</span>{{/error}}
             <fieldset>
                 <input type="hidden" name="id" value="{{#id}}{{id}}{{/id}}">
                 <label for="dayField">Datum</label>

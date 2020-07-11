@@ -4,6 +4,8 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 import org.springframework.util.Assert;
 
 import javax.persistence.Entity;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -11,9 +13,16 @@ import java.time.LocalTime;
 @Entity
 class TimeEntry extends AbstractPersistable<Integer> {
 
+    @NotNull(message = "Start time is mandatory")
     private LocalTime startTime;
+
+    @NotNull(message = "End time is mandatory")
     private LocalTime endTime;
+
+    @NotNull(message = "Day is mandatory")
     private LocalDate day;
+
+    @NotBlank(message = "Description is mandatory")
     private String description;
 
     TimeEntry() {

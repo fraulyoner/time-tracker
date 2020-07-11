@@ -39,3 +39,7 @@ td > input[type="checkbox"] + label {
 td > input[type="checkbox"]:checked + label {
     text-decoration: line-through;
 }
+
+.form-error {
+    color: red;
+}

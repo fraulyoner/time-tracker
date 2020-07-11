@@ -3,8 +3,11 @@ package de.fraulyoner.timetracker.timeentry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -52,9 +55,12 @@ class TimeEntryController {
     }
 
     @PostMapping("/entries/new")
-    String addTimeEntry(@ModelAttribute("timeEntry") TimeEntry timeEntry) {
+    String addTimeEntry(@Valid TimeEntry timeEntry, Errors errors, Model model) {
 
-        // TODO: Validate timeEntryDto!
+        if(errors.hasErrors()) {
+            model.addAttribute("error", true);
+            return "entry";
+        }
 
         timeEntryProvider.addOrUpdateTimeEntry(timeEntry);
 
