@@ -1,5 +1,8 @@
-package de.fraulyoner.timetracker;
+package de.fraulyoner.timetracker.timeentry;
 
+import de.fraulyoner.timetracker.timeentry.TimeEntry;
+import de.fraulyoner.timetracker.timeentry.TimeTrackProposal;
+import de.fraulyoner.timetracker.timeentry.WorkDay;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

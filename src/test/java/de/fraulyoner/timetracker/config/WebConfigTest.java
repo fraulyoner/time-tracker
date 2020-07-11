@@ -1,5 +1,6 @@
-package de.fraulyoner.timetracker;
+package de.fraulyoner.timetracker.config;
 
+import de.fraulyoner.timetracker.config.WebConfig;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

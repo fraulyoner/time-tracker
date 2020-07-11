@@ -1,4 +1,4 @@
-package de.fraulyoner.timetracker;
+package de.fraulyoner.timetracker.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;

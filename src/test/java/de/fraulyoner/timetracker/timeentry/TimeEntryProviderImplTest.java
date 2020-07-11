@@ -1,5 +1,9 @@
-package de.fraulyoner.timetracker;
+package de.fraulyoner.timetracker.timeentry;
 
+import de.fraulyoner.timetracker.timeentry.TimeEntry;
+import de.fraulyoner.timetracker.timeentry.TimeEntryDao;
+import de.fraulyoner.timetracker.timeentry.TimeEntryProvider;
+import de.fraulyoner.timetracker.timeentry.TimeEntryProviderImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

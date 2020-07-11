@@ -1,4 +1,4 @@
-package de.fraulyoner.timetracker;
+package de.fraulyoner.timetracker.timeentry;
 
 import java.time.LocalDate;
 import java.util.*;

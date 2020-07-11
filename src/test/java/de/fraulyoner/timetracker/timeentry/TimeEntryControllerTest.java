@@ -1,5 +1,8 @@
-package de.fraulyoner.timetracker;
+package de.fraulyoner.timetracker.timeentry;
 
+import de.fraulyoner.timetracker.timeentry.TimeEntry;
+import de.fraulyoner.timetracker.timeentry.TimeEntryController;
+import de.fraulyoner.timetracker.timeentry.TimeEntryProvider;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;

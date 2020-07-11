@@ -1,4 +1,4 @@
-package de.fraulyoner.timetracker;
+package de.fraulyoner.timetracker.timeentry;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
 import org.springframework.util.Assert;
