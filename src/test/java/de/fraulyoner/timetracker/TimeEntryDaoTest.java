@@ -48,9 +48,9 @@ class TimeEntryDaoTest {
         LocalDate date2 = LocalDate.of(2020, 7, 8);
         LocalDate date3 = LocalDate.of(2020, 5, 22);
 
-        TimeEntry timeEntry1 = new TimeEntry(date1, LocalTime.of(8, 30), LocalTime.of(8, 45), "123", "Daily");
-        TimeEntry timeEntry2 = new TimeEntry(date2, LocalTime.of(8, 30), LocalTime.of(8, 45), "123", "Daily");
-        TimeEntry timeEntry3 = new TimeEntry(date3, LocalTime.of(8, 30), LocalTime.of(8, 45), "123", "Daily");
+        TimeEntry timeEntry1 = new TimeEntry(date1, LocalTime.of(8, 30), LocalTime.of(8, 45), "Daily");
+        TimeEntry timeEntry2 = new TimeEntry(date2, LocalTime.of(8, 30), LocalTime.of(8, 45), "Daily");
+        TimeEntry timeEntry3 = new TimeEntry(date3, LocalTime.of(8, 30), LocalTime.of(8, 45), "Daily");
 
         timeEntryDao.save(timeEntry1);
         timeEntryDao.save(timeEntry2);
@@ -68,9 +68,9 @@ class TimeEntryDaoTest {
 
         LocalDate date = LocalDate.of(2020, 7, 1);
 
-        TimeEntry timeEntry1 = new TimeEntry(date, LocalTime.of(8, 30), LocalTime.of(8, 45), "123", "first");
-        TimeEntry timeEntry2 = new TimeEntry(date, LocalTime.of(10, 30), LocalTime.of(11, 0), "123", "third");
-        TimeEntry timeEntry3 = new TimeEntry(date, LocalTime.of(9, 0), LocalTime.of(9, 30), "123", "second");
+        TimeEntry timeEntry1 = new TimeEntry(date, LocalTime.of(8, 30), LocalTime.of(8, 45), "first");
+        TimeEntry timeEntry2 = new TimeEntry(date, LocalTime.of(10, 30), LocalTime.of(11, 0), "third");
+        TimeEntry timeEntry3 = new TimeEntry(date, LocalTime.of(9, 0), LocalTime.of(9, 30), "second");
 
         timeEntryDao.save(timeEntry1);
         timeEntryDao.save(timeEntry2);
@@ -92,10 +92,10 @@ class TimeEntryDaoTest {
         LocalDate date2 = LocalDate.of(2020, 7, 8);
         LocalDate date3 = LocalDate.of(2020, 8, 22);
 
-        TimeEntry timeEntry1 = new TimeEntry(date1, LocalTime.of(8, 30), LocalTime.of(8, 45), "123", "Daily");
-        TimeEntry timeEntry2 = new TimeEntry(date2, LocalTime.of(8, 30), LocalTime.of(8, 45), "123", "Daily");
-        TimeEntry timeEntry3 = new TimeEntry(date3, LocalTime.of(8, 30), LocalTime.of(8, 45), "123", "Daily");
-        TimeEntry timeEntry4 = new TimeEntry(date3, LocalTime.of(10, 30), LocalTime.of(11, 0), "123", "Foo");
+        TimeEntry timeEntry1 = new TimeEntry(date1, LocalTime.of(8, 30), LocalTime.of(8, 45), "Daily");
+        TimeEntry timeEntry2 = new TimeEntry(date2, LocalTime.of(8, 30), LocalTime.of(8, 45), "Daily");
+        TimeEntry timeEntry3 = new TimeEntry(date3, LocalTime.of(8, 30), LocalTime.of(8, 45), "Daily");
+        TimeEntry timeEntry4 = new TimeEntry(date3, LocalTime.of(10, 30), LocalTime.of(11, 0), "Foo");
 
         timeEntryDao.save(timeEntry1);
         timeEntryDao.save(timeEntry2);

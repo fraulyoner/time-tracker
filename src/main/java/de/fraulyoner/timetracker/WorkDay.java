@@ -19,22 +19,21 @@ class WorkDay {
 
         List<TimeTrackProposal> proposals = new ArrayList<>();
 
-        Map<TimeTrackActivity, Float> durations = new LinkedHashMap<>();
+        Map<String, Float> durations = new LinkedHashMap<>();
 
         for (TimeEntry timeEntry : timeEntries) {
-            TimeTrackActivity a = new TimeTrackActivity(timeEntry.getIssue(), timeEntry.getDescription());
-
+            String description = timeEntry.getDescription();
             float duration = 0;
 
-            if (durations.containsKey(a)) {
-                duration = durations.get(a);
+            if (durations.containsKey(description)) {
+                duration = durations.get(description);
             }
 
             duration += timeEntry.getDuration();
-            durations.put(a, duration);
+            durations.put(description, duration);
         }
 
-        for (Map.Entry<TimeTrackActivity, Float> timeTrackActivityEntry : durations.entrySet()) {
+        for (Map.Entry<String, Float> timeTrackActivityEntry : durations.entrySet()) {
             proposals.add(new TimeTrackProposal(timeTrackActivityEntry.getKey(), timeTrackActivityEntry.getValue()));
         }
 

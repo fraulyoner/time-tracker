@@ -4,32 +4,25 @@ import org.springframework.util.Assert;
 
 class TimeTrackProposal {
 
-    private final TimeTrackActivity timeTrackActivity;
+    private final String description;
     private final float duration;
 
-    TimeTrackProposal(TimeTrackActivity timeTrackActivity, float duration) {
-        Assert.notNull(timeTrackActivity, "Time track activity must not be null");
+    TimeTrackProposal(String description, float duration) {
+        Assert.hasText(description, "Description must not be empty");
         Assert.isTrue(duration > 0, "Duration must be > 0");
         Assert.isTrue(duration <= 24, "Duration must be <= 24");
 
-        this.timeTrackActivity = timeTrackActivity;
+        this.description = description;
         this.duration = duration;
     }
 
-    String getIssue() {
-        return timeTrackActivity.getIssue();
-    }
-
     String getDescription() {
-        return timeTrackActivity.getDescription();
+        return description;
     }
 
     String getIdentifier() {
 
-        String description = getDescription().toLowerCase().replace(" ", "-");
-        String issue = getIssue().toLowerCase().replace(" ", "-");
-
-        return issue + "-" + description;
+        return getDescription().toLowerCase().replace(" ", "-");
     }
 
     float getDuration() {

@@ -12,7 +12,7 @@ class TimeEntryTest {
     void ensureCanNotBeInitializedWithoutDay() {
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            new TimeEntry(null, LocalTime.now(), LocalTime.now().plusHours(1),"123", "very important things");
+            new TimeEntry(null, LocalTime.now(), LocalTime.now().plusHours(1), "very important things");
         });
 
     }
@@ -21,7 +21,7 @@ class TimeEntryTest {
     void ensureCanNotBeInitializedWithoutStart() {
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            new TimeEntry( LocalDate.now(), null, LocalTime.now(), "#ISSUE-123", "very important things");
+            new TimeEntry( LocalDate.now(), null, LocalTime.now(), "very important things");
         });
 
     }
@@ -30,7 +30,7 @@ class TimeEntryTest {
     void ensureCanNotBeInitializedWithoutEnd() {
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            new TimeEntry(LocalDate.now(), LocalTime.now(), null, "#ISSUE-123", "very important things");
+            new TimeEntry(LocalDate.now(), LocalTime.now(), null, "very important things");
         });
 
     }
@@ -39,7 +39,7 @@ class TimeEntryTest {
     void ensureCanNotBeInitializedWithoutDescription() {
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            new TimeEntry(LocalDate.now(), LocalTime.now(), LocalTime.now().plusHours(1), "#ISSUE-123", null);
+            new TimeEntry(LocalDate.now(), LocalTime.now(), LocalTime.now().plusHours(1), null);
         });
 
     }
@@ -48,33 +48,11 @@ class TimeEntryTest {
     void ensureCanNotBeInitializedWithEmptyDescription() {
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            new TimeEntry(LocalDate.now(), LocalTime.now(), LocalTime.now().plusHours(1), "#ISSUE-123", "");
+            new TimeEntry(LocalDate.now(), LocalTime.now(), LocalTime.now().plusHours(1), "");
         });
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            new TimeEntry(LocalDate.now(), LocalTime.now(), LocalTime.now().plusHours(1), "#ISSUE-123", " ");
-        });
-
-    }
-
-    @Test
-    void ensureCanNotBeInitializedWithoutIssue() {
-
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            new TimeEntry(LocalDate.now(), LocalTime.now(), LocalTime.now().plusHours(1),null, "very important things");
-        });
-
-    }
-
-    @Test
-    void ensureCanNotBeInitializedWithEmptyIssue() {
-
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            new TimeEntry(LocalDate.now(), LocalTime.now(), LocalTime.now().plusHours(1), "", "very important things");
-        });
-
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            new TimeEntry(LocalDate.now(), LocalTime.now(), LocalTime.now().plusHours(1),  " ", "very important things");
+            new TimeEntry(LocalDate.now(), LocalTime.now(), LocalTime.now().plusHours(1), " ");
         });
 
     }
@@ -85,7 +63,7 @@ class TimeEntryTest {
         LocalTime now = LocalTime.now();
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            new TimeEntry(LocalDate.now(), now.plusHours(1), now, "#ISSUE-123", "very important things");
+            new TimeEntry(LocalDate.now(), now.plusHours(1), now, "very important things");
         });
 
     }
@@ -96,7 +74,7 @@ class TimeEntryTest {
         LocalTime now = LocalTime.now();
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            new TimeEntry(LocalDate.now(), now, now, "#ISSUE-123", "very important things");
+            new TimeEntry(LocalDate.now(), now, now, "very important things");
         });
 
     }
@@ -104,12 +82,11 @@ class TimeEntryTest {
     @Test
     void ensureCanBeInitializedWithValidFields() {
 
-        TimeEntry timeEntry = new TimeEntry(LocalDate.now(), LocalTime.now(), LocalTime.now().plusHours(1), "#ISSUE-123", "Something very important");
+        TimeEntry timeEntry = new TimeEntry(LocalDate.now(), LocalTime.now(), LocalTime.now().plusHours(1), "Something very important");
 
         Assertions.assertNotNull(timeEntry.getDay(), "Day is missing");
         Assertions.assertNotNull(timeEntry.getStartTime(), "Start time is missing");
         Assertions.assertNotNull(timeEntry.getEndTime(), "End time is missing");
-        Assertions.assertNotNull(timeEntry.getIssue(), "Issue is missing");
         Assertions.assertNotNull(timeEntry.getDescription(), "Description is missing");
     }
 
@@ -118,7 +95,7 @@ class TimeEntryTest {
 
         LocalDate date = LocalDate.of(2020, 6, 23);
 
-        TimeEntry timeEntry = new TimeEntry(date, LocalTime.of(8, 30), LocalTime.of(9,0), "#ISSUE-123", "Meeting");
+        TimeEntry timeEntry = new TimeEntry(date, LocalTime.of(8, 30), LocalTime.of(9,0), "Meeting");
 
         Assertions.assertNotNull(timeEntry.getDay(), "Day is missing");
         Assertions.assertEquals(date, timeEntry.getDay(), "Wrong day");
@@ -129,16 +106,16 @@ class TimeEntryTest {
 
         LocalDate today = LocalDate.now();
 
-        TimeEntry timeEntry = new TimeEntry(today, LocalTime.of(8, 30), LocalTime.of(10,0), "#ISSUE-123", "Meeting");
+        TimeEntry timeEntry = new TimeEntry(today, LocalTime.of(8, 30), LocalTime.of(10,0), "Meeting");
         Assertions.assertEquals(1.5, timeEntry.getDuration(), "Wrong duration");
 
-        timeEntry = new TimeEntry(today, LocalTime.of(8, 30), LocalTime.of(9,0), "#ISSUE-123", "Meeting");
+        timeEntry = new TimeEntry(today, LocalTime.of(8, 30), LocalTime.of(9,0), "Meeting");
         Assertions.assertEquals(0.5, timeEntry.getDuration(), "Wrong duration");
 
-        timeEntry = new TimeEntry(today, LocalTime.of(8, 30), LocalTime.of(8,45), "#ISSUE-123", "Meeting");
+        timeEntry = new TimeEntry(today, LocalTime.of(8, 30), LocalTime.of(8,45), "Meeting");
         Assertions.assertEquals(0.25, timeEntry.getDuration(), "Wrong duration");
 
-        timeEntry = new TimeEntry(today, LocalTime.of(8, 30), LocalTime.of(9,30), "#ISSUE-123", "Meeting");
+        timeEntry = new TimeEntry(today, LocalTime.of(8, 30), LocalTime.of(9,30), "Meeting");
         Assertions.assertEquals(1, timeEntry.getDuration(), "Wrong duration");
 
     }

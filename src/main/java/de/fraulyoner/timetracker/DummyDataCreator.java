@@ -31,9 +31,9 @@ class DummyDataCreator {
 
         LOG.info("Creating test data for " + day.toString());
 
-        createTimeEntry(new TimeEntry(day, LocalTime.of(8, 30), LocalTime.of(9, 0), "#123", "Daily"));
-        createTimeEntry(new TimeEntry(day, LocalTime.of(9, 0), LocalTime.of(10, 0), "#123", "Organisation und Co."));
-        createTimeEntry(new TimeEntry(day, LocalTime.of(13, 15), LocalTime.of(14, 0), "#123", "Organisation und Co."));
+        createTimeEntry(new TimeEntry(day, LocalTime.of(8, 30), LocalTime.of(9, 0), "Daily"));
+        createTimeEntry(new TimeEntry(day, LocalTime.of(9, 0), LocalTime.of(10, 0), "Organisation und Co."));
+        createTimeEntry(new TimeEntry(day, LocalTime.of(13, 15), LocalTime.of(14, 0), "Organisation und Co."));
 
     }
 

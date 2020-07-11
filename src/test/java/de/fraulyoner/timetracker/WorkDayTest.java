@@ -17,10 +17,10 @@ class WorkDayTest {
     @BeforeEach
     void setUp() {
 
-        TimeEntry daily = new TimeEntry(date, LocalTime.of(8, 30), LocalTime.of(9, 0), "123", "Daily");
-        TimeEntry orga1 = new TimeEntry(date, LocalTime.of(9, 0), LocalTime.of(10, 0), "123", "Orga");
-        TimeEntry intern = new TimeEntry(date, LocalTime.of(10, 0), LocalTime.of(11, 15), "456", "Interna");
-        TimeEntry orga2 = new TimeEntry(date, LocalTime.of(11, 15), LocalTime.of(11, 45), "123", "Orga");
+        TimeEntry daily = new TimeEntry(date, LocalTime.of(8, 30), LocalTime.of(9, 0), "Daily");
+        TimeEntry orga1 = new TimeEntry(date, LocalTime.of(9, 0), LocalTime.of(10, 0), "Orga");
+        TimeEntry intern = new TimeEntry(date, LocalTime.of(10, 0), LocalTime.of(11, 15), "Interna");
+        TimeEntry orga2 = new TimeEntry(date, LocalTime.of(11, 15), LocalTime.of(11, 45), "Orga");
 
         sampleTimeEntries.add(daily);
         sampleTimeEntries.add(orga1);
@@ -59,19 +59,16 @@ class WorkDayTest {
 
         // Daily
         TimeTrackProposal daily = proposals.get(0);
-        Assertions.assertEquals("123", daily.getIssue(), "Wrong issue");
         Assertions.assertEquals("Daily", daily.getDescription(), "Wrong description");
         Assertions.assertEquals(0.5, daily.getDuration(), "Wrong duration");
 
         // Orga
         TimeTrackProposal orga = proposals.get(1);
-        Assertions.assertEquals("123", orga.getIssue(), "Wrong issue");
         Assertions.assertEquals("Orga", orga.getDescription(), "Wrong description");
         Assertions.assertEquals(1.5, orga.getDuration(), "Wrong duration");
 
         // Interna
         TimeTrackProposal intern = proposals.get(2);
-        Assertions.assertEquals("456", intern.getIssue(), "Wrong issue");
         Assertions.assertEquals("Interna", intern.getDescription(), "Wrong description");
         Assertions.assertEquals(1.25, intern.getDuration(), "Wrong duration");
 

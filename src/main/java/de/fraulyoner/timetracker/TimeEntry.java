@@ -14,25 +14,22 @@ class TimeEntry extends AbstractPersistable<Integer> {
     private LocalTime startTime;
     private LocalTime endTime;
     private LocalDate day;
-    private String issue;
     private String description;
 
     TimeEntry() {
         /* OK */
     }
 
-    TimeEntry(LocalDate day, LocalTime startTime, LocalTime endTime, String issue, String description) {
+    TimeEntry(LocalDate day, LocalTime startTime, LocalTime endTime, String description) {
         Assert.notNull(day, "Day must not be null");
         Assert.notNull(startTime, "Start time must not be null");
         Assert.notNull(endTime, "End time must not be null");
-        Assert.hasText(issue, "Issue must not be empty");
         Assert.hasText(description, "Description must not be empty");
         Assert.isTrue(startTime.isBefore(endTime), "Start time must be before end time");
 
         this.startTime = startTime;
         this.endTime = endTime;
         this.day = day;
-        this.issue = issue;
         this.description = description;
     }
 
@@ -68,14 +65,6 @@ class TimeEntry extends AbstractPersistable<Integer> {
         this.day = day;
     }
 
-    public String getIssue() {
-        return issue;
-    }
-
-    public void setIssue(String issue) {
-        this.issue = issue;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -98,7 +87,6 @@ class TimeEntry extends AbstractPersistable<Integer> {
                 "startTime=" + startTime +
                 ", endTime=" + endTime +
                 ", day=" + day +
-                ", issue='" + issue + '\'' +
                 ", description='" + description + '\'' +
                 '}';
     }

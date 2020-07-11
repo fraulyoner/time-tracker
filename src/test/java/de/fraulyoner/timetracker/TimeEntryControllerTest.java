@@ -47,7 +47,7 @@ class TimeEntryControllerTest {
     void trackingShouldContainEntryInformation() throws Exception {
 
         LocalDate day = LocalDate.of(2020, 6, 23);
-        List<TimeEntry> entries = Collections.singletonList(new TimeEntry(day, LocalTime.of(8, 30), LocalTime.of(9, 0), "#123", "Daily"));
+        List<TimeEntry> entries = Collections.singletonList(new TimeEntry(day, LocalTime.of(8, 30), LocalTime.of(9, 0), "Daily"));
 
         when(timeEntryProvider.getAllTimeEntriesForDay(any(LocalDate.class))).thenReturn(entries);
 
@@ -64,7 +64,7 @@ class TimeEntryControllerTest {
     void trackingWithoutExplicitDateShouldFetchEntriesForToday() throws Exception {
 
         LocalDate today = LocalDate.now();
-        List<TimeEntry> entries = Collections.singletonList(new TimeEntry(today, LocalTime.of(8, 30), LocalTime.of(9, 0), "#123", "Daily"));
+        List<TimeEntry> entries = Collections.singletonList(new TimeEntry(today, LocalTime.of(8, 30), LocalTime.of(9, 0), "Daily"));
 
         when(timeEntryProvider.getAllTimeEntriesForDay(any(LocalDate.class))).thenReturn(entries);
 

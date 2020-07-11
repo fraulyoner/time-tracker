@@ -23,7 +23,6 @@ class TimeEntryProviderImplTest {
                         today,
                         LocalTime.of(9, 0),
                         LocalTime.of(10, 30),
-                        "issue123",
                         "very important work")
                 );
 
