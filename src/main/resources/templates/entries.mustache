@@ -51,7 +51,10 @@
             <tbody>
             {{#workDay.trackingProposals}}
                 <tr>
-                    <td>{{issue}} – {{description}}</td>
+                    <td>
+                        <input type="checkbox" id="proposalField-{{identifier}}">
+                        <label for="proposalField-{{identifier}}">{{issue}} – {{description}}</label>
+                    </td>
                     <td>{{duration}}</td>
                 </tr>
             {{/workDay.trackingProposals}}

@@ -44,4 +44,12 @@ class TimeTrackProposalTest {
         Assertions.assertEquals(proposal.getDescription(), "foo", "Wrong description");
 
     }
+
+    @Test
+    void ensureReturnsCorrectIdentifier() {
+
+        TimeTrackProposal proposal = new TimeTrackProposal(new TimeTrackActivity("123", "Orga und so"), (float) 0.5);
+
+        Assertions.assertEquals("123-orga-und-so", proposal.getIdentifier(), "Wrong identifier");
+    }
 }

@@ -23,3 +23,19 @@
 tr.no-border > td, th {
   border-bottom: none;
 }
+
+td > .button,
+td > input {
+    margin-bottom: 0 !important;
+}
+
+td > input[type="checkbox"] + label {
+    display: inline-block;
+    font-weight: 300;
+    margin-bottom: 0;
+    padding-left: 1.5rem;
+}
+
+td > input[type="checkbox"]:checked + label {
+    text-decoration: line-through;
+}

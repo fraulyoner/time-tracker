@@ -24,6 +24,14 @@ class TimeTrackProposal {
         return timeTrackActivity.getDescription();
     }
 
+    String getIdentifier() {
+
+        String description = getDescription().toLowerCase().replace(" ", "-");
+        String issue = getIssue().toLowerCase().replace(" ", "-");
+
+        return issue + "-" + description;
+    }
+
     float getDuration() {
         return duration;
     }
