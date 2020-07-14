@@ -81,7 +81,12 @@ class TimeEntryController {
     }
 
     @PostMapping("/entries/{id}")
-    String updateTimeEntry(@ModelAttribute("timeEntry") TimeEntry timeEntry) {
+    String updateTimeEntry(@Valid TimeEntry timeEntry, Errors errors, Model model) {
+
+        if(errors.hasErrors()) {
+            model.addAttribute("error", true);
+            return "entry";
+        }
 
         timeEntryProvider.addOrUpdateTimeEntry(timeEntry);
 
