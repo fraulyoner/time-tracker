@@ -1,9 +1,5 @@
 package de.fraulyoner.timetracker.timeentry;
 
-import de.fraulyoner.timetracker.timeentry.TimeEntry;
-import de.fraulyoner.timetracker.timeentry.TimeEntryDao;
-import de.fraulyoner.timetracker.timeentry.TimeEntryProvider;
-import de.fraulyoner.timetracker.timeentry.TimeEntryProviderImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -37,21 +33,6 @@ class TimeEntryProviderImplTest {
         Mockito.verify(timeEntryDao).findByDayOrderByStartTime(today);
 
         Assertions.assertEquals(timeEntries, allTimeEntriesForDay, "Wrong list of time entries");
-
-    }
-
-    @Test
-    void ensureCanFindAllWorkDaysByUsingDao() {
-
-        LocalDate today = LocalDate.now();
-
-        Mockito.when(timeEntryDao.findAllDays()).thenReturn(Collections.singletonList(today));
-
-        List<LocalDate> allWorkDays = timeEntryProvider.getAllWorkDays();
-
-        Mockito.verify(timeEntryDao).findAllDays();
-
-        Assertions.assertEquals(allWorkDays.size(), 1, "Wrong number of work days");
 
     }
 

@@ -3,12 +3,13 @@ package de.fraulyoner.timetracker.timeentry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,9 +21,28 @@ class TimeEntryController {
 
     @GetMapping("/")
     String index(Model model) {
-        List<LocalDate> workDays = timeEntryProvider.getAllWorkDays();
+
+        return "redirect:/weeks/0";
+    }
+
+    @GetMapping("/weeks/{week}")
+    String week(@PathVariable("week") Integer week, Model model) {
+
+        LocalDate monday = LocalDate.now().plusWeeks(week).with(DayOfWeek.MONDAY);
+
+        List<WorkDay> workDays = new ArrayList<>();
+
+        LocalDate day = monday;
+
+        for(int i = 0; i < 7; i++) {
+            List<TimeEntry> entries = timeEntryProvider.getAllTimeEntriesForDay(day);
+            workDays.add(new WorkDay(day, entries));
+            day = day.plusDays(1);
+        }
+
         model.addAttribute("workDays", workDays);
-        return "index";
+
+        return "week";
     }
 
     @GetMapping("/entries")

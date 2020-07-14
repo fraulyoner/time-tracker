@@ -43,3 +43,7 @@ td > input[type="checkbox"]:checked + label {
 .form-error {
     color: red;
 }
+
+nav > a {
+    padding-right: 1.5rem;
+}

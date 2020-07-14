@@ -24,11 +24,6 @@ class TimeEntryProviderImpl implements TimeEntryProvider {
     }
 
     @Override
-    public List<LocalDate> getAllWorkDays() {
-        return timeEntryDao.findAllDays();
-    }
-
-    @Override
     public void addOrUpdateTimeEntry(TimeEntry timeEntry) {
         timeEntryDao.save(timeEntry);
     }

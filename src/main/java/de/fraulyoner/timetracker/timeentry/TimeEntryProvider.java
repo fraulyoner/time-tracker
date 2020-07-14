@@ -8,8 +8,6 @@ interface TimeEntryProvider {
 
     List<TimeEntry> getAllTimeEntriesForDay(LocalDate day);
 
-    List<LocalDate> getAllWorkDays();
-
     void addOrUpdateTimeEntry(TimeEntry timeEntry);
 
     Optional<TimeEntry> getById(Integer id);
