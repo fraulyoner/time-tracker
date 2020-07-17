@@ -10,6 +10,7 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+@ValidDuration(message = "Start time must be before end time")
 @Entity
 class TimeEntry extends AbstractPersistable<Integer> {
 
