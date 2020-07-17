@@ -61,10 +61,8 @@ class TimeEntryTest {
     @Test
     void ensureCanNotBeInitializedIfStartIsAfterEnd() {
 
-        LocalTime now = LocalTime.now();
-
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            new TimeEntry(LocalDate.now(), now.plusHours(1), now, "very important things");
+            new TimeEntry(LocalDate.now(), LocalTime.of(11,0), LocalTime.of(10, 0), "very important things");
         });
 
     }
@@ -83,7 +81,7 @@ class TimeEntryTest {
     @Test
     void ensureCanBeInitializedWithValidFields() {
 
-        TimeEntry timeEntry = new TimeEntry(LocalDate.now(), LocalTime.now(), LocalTime.now().plusHours(1), "Something very important");
+        TimeEntry timeEntry = new TimeEntry(LocalDate.now(), LocalTime.of(10, 0), LocalTime.of(11, 0), "Something very important");
 
         Assertions.assertNotNull(timeEntry.getDay(), "Day is missing");
         Assertions.assertNotNull(timeEntry.getStartTime(), "Start time is missing");
